@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const Reparaciones = ({ reparacion,setReparacion,eliminarReparacion }) => {
+const Reparaciones = ({ reparacion,setReparacion,eliminarReparacion, finalizarReparacion }) => {
   const [finalizar, setFinalizar] = useState('');
   const [finalizado, setFinalizado] = useState(false);
   console.table(reparacion)
@@ -13,6 +13,7 @@ const handleEliminar= ()=>{
   }
 }
 
+
   const fechaActual = () => {
     const fechaActual = new Date();
     const dia = fechaActual.getDate().toString().padStart(2, "0");
@@ -22,20 +23,21 @@ const handleEliminar= ()=>{
     const minutos = fechaActual.getMinutes().toString().padStart(2, "0");
     const fechaFormateada = `${dia}/${mes}/${anio} ${hora}:${minutos}`;
     setFinalizar(fechaFormateada)
+    finalizarReparacion(fechaFormateada,id)
     setFinalizado(true)
    
   };
-  const otFinalizada = {...reparacion}
+  // const otFinalizada = {...reparacion}
 
-  otFinalizada.fechaFinalizada = {finalizar}
-  console.table(otFinalizada)
+  // otFinalizada.fechaFinalizada = {finalizar}
+  // console.table(otFinalizada)
 
-  const { nombre, telefono, email, marca, modelo, imei, fecha, averia,id } =
+  const { nombre, telefono, email, marca, modelo, imei, fecha, estado, fechaFinalizada, averia,id } =
     reparacion;
 
     const divStyle = {
       margin: '5rem',
-      backgroundColor: finalizado ? '#D8E8C8' : '#fff',
+      backgroundColor: fechaFinalizada || estado == 'Reparado' ? '#D8E8C8' : '#fff',
       boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
       padding: '2.5rem',
       borderRadius: '0.5rem',
@@ -67,8 +69,12 @@ const handleEliminar= ()=>{
         <span className="font-normal normal-case">{fecha}</span>
       </p>
       <p className="font-bold mb-3 uppercase text-gray-700">
+        estado:{" "}
+        <span className="font-normal normal-case">{estado}</span>
+      </p>
+      <p className="font-bold mb-3 uppercase text-gray-700">
         Fecha de Reparacion:{" "}
-        <span className="font-normal normal-case">{finalizar}</span>
+        <span className="font-normal normal-case">{fechaFinalizada}</span>
       </p>
       <p className="font-bold mb-3 uppercase text-gray-700">
         Averia: <span className="font-normal normal-case">{averia}</span>
@@ -78,7 +84,7 @@ const handleEliminar= ()=>{
           type="button"
           className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg"
           onClick={()=>{
-            setReparacion(otFinalizada)
+            setReparacion(reparacion)
           }}
         >
           Editar

@@ -31,6 +31,17 @@ function App() {
   }
 
 
+const finalizarReparacion = (fecha, id) =>{
+console.log(reparaciones)
+  for(let re of reparaciones){
+    if(re.id === id){
+      re.fechaFinalizada = fecha
+    }
+  }
+  setReparaciones(reparaciones)
+  localStorage.setItem('reparaciones', JSON.stringify(reparaciones))
+  console.log(reparaciones)
+}
 
   return (
     <div className="container mx-auto mt-20">
@@ -44,12 +55,15 @@ function App() {
         setReparaciones = {setReparaciones}
         reparacion={reparacion}
         setReparacion={setReparacion}
+        finalizarReparacion={finalizarReparacion}
          />
         
         <ListadoOrdenes
           reparaciones = {reparaciones}
           setReparacion = {setReparacion}
         eliminarReparacion={eliminarReparacion}
+        setReparaciones = {setReparaciones}
+        finalizarReparacion={finalizarReparacion}
           
          />
 

@@ -6,6 +6,7 @@ const Formulario = ({
   setReparaciones,
   reparacion,
   setReparacion,
+  finalizarReparacion
 }) => {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -14,6 +15,7 @@ const Formulario = ({
   const [modelo, setModelo] = useState("");
   const [imei, setImei] = useState("");
   const [fecha, setFecha] = useState("");
+  const [estado, setEstado] = useState("");
   const [averia, setAveria] = useState("");
 
   const [error, setError] = useState(false);
@@ -57,7 +59,9 @@ const Formulario = ({
       modelo,
       imei,
       fecha,
+      estado,
       averia,
+      
     };
 
     if (reparacion.id) {
@@ -87,6 +91,7 @@ const Formulario = ({
     setImei("");
     setFecha("");
     setAveria("");
+    setEstado("");
   };
 
   return (
@@ -225,6 +230,23 @@ const Formulario = ({
             value={fecha}
             onChange={(e) => setFecha(e.target.value)}
           />
+        </div>
+        <div className="mb-5">
+          <label htmlFor="estado"   className="block text-gray-700 uppercase font-bold">Estado</label>
+          <select
+            id="estado"
+            className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={estado}
+            onChange={(e) => setEstado(e.target.value)}
+          >
+            <option value="">-- Seleccione --</option>
+            <option value="Averiado Pendiente Revision">Averiado Pendiente Revision</option>
+            <option value="Pendiente de Repuesto">Pendiente de Repuesto</option>
+            <option value="Repuesto Solicitado">Repuesto Solicitado</option>
+            <option value="Pendiente de Envio a SAT">Pendiente de Envio a SAT</option>
+            <option value="Enviado a SAT">Enviado a SAT</option>
+            <option value="Reparado">Reparado</option>
+          </select>
         </div>
         <div className="mb-5">
           <label

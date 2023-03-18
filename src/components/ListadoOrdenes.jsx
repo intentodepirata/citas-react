@@ -2,7 +2,7 @@ import Reparaciones from "./Reparaciones";
 
 
 
-const ListadoOrdenes = ({ reparaciones, setReparacion,eliminarReparacion }) => {
+const ListadoOrdenes = ({ reparaciones, setReparacion,eliminarReparacion, finalizarReparacion }) => {
 
 
 
@@ -24,6 +24,9 @@ const ListadoOrdenes = ({ reparaciones, setReparacion,eliminarReparacion }) => {
              reparacion={reparacion}
              setReparacion={setReparacion}
              eliminarReparacion={eliminarReparacion}
+             finalizarReparacion={finalizarReparacion}
+             
+             
 
             />
           ))}
